@@ -8,7 +8,7 @@ const request = {
     const contentType = response.headers.get('Content-Type') || ''
     if (contentType.includes('text/html')) {
       throw new Error(
-        'El backend no ha devuelto JSON (respuesta HTML). Comprueba que los contenedores Docker estén corriendo: docker-compose up -d (en la carpeta Documental). El backend debe estar en http://127.0.0.1:8000.'
+        'El backend no ha devuelto JSON (respuesta HTML). Si estás usando Docker, levanta primero el backend (carpeta documental_backend) y luego el frontend. Backend: http://localhost:8000.'
       )
     }
     return response

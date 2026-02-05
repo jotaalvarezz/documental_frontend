@@ -36,3 +36,24 @@ npm run dev
 ```sh
 npm run build
 ```
+
+## Docker (junto con `documental_backend`)
+
+Levanta primero el backend (esto crea la red Docker `documental`):
+
+```sh
+cd ../documental_backend
+docker compose up -d --build
+```
+
+Luego levanta el frontend:
+
+```sh
+cd ../documental_frontend
+docker compose up -d --build
+```
+
+- **Frontend**: `http://localhost:5173`
+- **Backend**: `http://localhost:8000`
+
+El frontend sirve el `dist` con Nginx y hace **proxy de `/api` hacia el contenedor `laravel_nginx`** por la red `documental`.
