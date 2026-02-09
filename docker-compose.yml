@@ -3,10 +3,22 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: dev
     container_name: documental_frontend
     restart: unless-stopped
     ports:
-      - "5173:80"
+      - "5173:5173"
+    volumes:
+      # Código fuente en vivo (hot-reload)
+      - .:/app
+      # node_modules dentro del contenedor (evita problemas en Windows)
+      - /app/node_modules
+    environment:
+      # Watch más estable en Windows + Docker Desktop
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+      # Proxy /api -> backend Laravel dentro de Docker (service "nginx" en la red "documental")
+      - VITE_PROXY_TARGET=http://nginx
     networks:
       - documental
 

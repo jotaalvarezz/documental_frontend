@@ -42,6 +42,7 @@ const request = {
       }
     }
     if (q === 'move') {
+      listCache.value.delete(path)
       return {
         url: '/api/files/move',
         method: 'post',
